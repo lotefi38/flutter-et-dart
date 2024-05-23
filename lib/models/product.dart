@@ -7,7 +7,7 @@ required : parametre obligatoire
 */
 
 int id;
-String title, description, categorie, image;
+String title, description, category, image;
 num price;
 Map rating;
 // constructeur
@@ -15,7 +15,7 @@ Map rating;
     required this.id,
     required this.title,
     required this.description,
-    required this.categorie,
+    required this.category,
     required this.image,
     required this.price,
     required this.rating,

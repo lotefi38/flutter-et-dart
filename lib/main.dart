@@ -1,10 +1,22 @@
 // import des packages
 // biblio material : biblio de desing google
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:store/providers/product_provider.dart';
 import 'package:store/screens/home_screen.dart';
+import 'package:store/services/router_service.dart';
 
 //fonction main : point d'entrée de l'application
-void main() => runApp(const Store());
+void main() => runApp(
+  MultiProvider(
+    providers:[
+ ChangeNotifierProvider(
+ create: (context) => ProductProvider(),
+ ), 
+    ],
+    child: const Store(), 
+    ),
+    );
 
 // widget (composant) Store : représente l'application
 class Store extends StatelessWidget {
@@ -29,9 +41,11 @@ class Store extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       title: "Store",
-      home: HomeScreen(),
+      
+
+      routerConfig: RouterService.getRouter(),
     );
   }
 }

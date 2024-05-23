@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:store/models/product.dart';
 import 'package:store/widgets/common/appbar_widget.dart';
 import 'package:store/widgets/common/drawer_widget.dart';
 import 'package:store/widgets/home/ads_widget.dart';
@@ -11,11 +10,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /*
-      Scaffold permet l'architecturer l'application 
-      body : définir le contenu ppl de l'écran 
-      Appbar : barre de navigation 
-      Drawer : menu coulissant 
-      FloatingButton : bouton flottant ...
+      Scaffold permet d'architecturer l'application
+        body : définir le contenu principal de l'écran
+        AppBar : barre de navigation
+        Drawer : menu coulissant
+        FloatingButton : bouton flottant…
     */
     return Scaffold(
       appBar: const AppbarWidget(),
@@ -24,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             AdsWidget(),
-             ProductsGridWidget(),
+            ProductsGridWidget(),
           ],
         ),
       ),
