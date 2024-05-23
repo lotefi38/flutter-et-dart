@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 import 'package:store/config/config.dart';
+import 'package:store/models/product.dart';
 
 class ProductsService {
 
@@ -17,7 +17,19 @@ Future getProducts() async {
   if (response.statusCode == 200 ){
   //convertir les données en json
   List data = jsonDecode(response.body);
-  inspect(data);
+  return data
+  .map(
+  ( dynamic value) => Product(
+    id:value['id'],
+    title: value['title'],
+    description: value['description'],
+    categorie: value['categories'],
+    image: value['image'],
+    price: value['price'],
+    rating: value['rating']),
+  )
+  .toList();
+
   } else {
    throw Error();
 
