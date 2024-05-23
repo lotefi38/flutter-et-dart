@@ -29,14 +29,16 @@ class ProductItemGrid extends StatelessWidget {
           ),
         ),
         Text('${product.price}€'),
-        OutlinedButton(  
-         
-
+        OutlinedButton(
           onPressed: () {
-             context.read<ProductProvider>().product = product;
+            // read : écrire (setter) / mettre à jour la propriété product de ProductProvider
+            context.read<ProductProvider>().product = product;
 
-
-             context.pushNamed('product-details');
+            /*
+              naviguer vers un écran
+                context : écran en cours d'affichage
+            */
+            context.pushNamed('product-details');
           },
           style: OutlinedButton.styleFrom(
             backgroundColor: Colors.black,

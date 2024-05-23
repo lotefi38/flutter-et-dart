@@ -1,40 +1,39 @@
 import 'dart:async';
- 
 import 'package:flutter/material.dart';
- 
-// class du widget
+
+// classe du widget
 class AdsWidget extends StatefulWidget {
   AdsWidget({super.key});
- 
+
   /*
-    dart:
+    dart :
       List : équivalent à un array indicé
-      Map : équivalent à un objet  JS   (clé - valeure)
- 
-    visibilité des membres :
-      pas de visibilité protected
-      quand il a une propriété préfixé de _ ceci veut dire qu'elle est protected (ex _maPropriéte)
+      Map : équivalent à un objet JS
+
+      visiblité des membres :
+        pas de protected
+        préfixe _ : équivalent à private
   */
- 
+
   // Liste des Map
   final List<Map> _items = [
-    {'img': 'Ad1.jpg', 'text': 'Text1'},
-    {'img': 'Ad2.jpg', 'text': 'Text2'},
-    {'img': 'Ad3.jpg', 'text': 'Text3'},
+    {'img': 'ad1.jpg', 'text': 'Text1'},
+    {'img': 'ad2.jpg', 'text': 'Text2'},
+    {'img': 'ad3.jpg', 'text': 'Text3'},
   ];
- 
-  // idnice
+
+  // indice de la liste
   int _index = 0;
- 
+
   // minuteur
   // ? : valeur nulle
   Timer? _timer;
- 
+
   @override
   State<AdsWidget> createState() => _AdsWidgetState();
 }
- 
-// class de l'état du widget qui hérite de la class du Widget    , methode build responsable pour l'affichage
+
+// classe de l'état du widget
 class _AdsWidgetState extends State<AdsWidget> {
   /*
     cycle de vie d'un widget
@@ -44,12 +43,12 @@ class _AdsWidgetState extends State<AdsWidget> {
   @override
   void initState() {
     super.initState();
-    //declencher le timer
+    // déclencher le timer
     widget._timer = Timer.periodic(const Duration(seconds: 2), _setTimer);
   }
- 
+
   void _setTimer(Timer timer) {
-    // setState : permet de modifier uné tat et de décencher la mise à jour visuelle du widget
+    // setState : permet de modifier un état et de déclencher la mise à jour visuelle du widget
     setState(() {
       if (widget._index < widget._items.length - 1) {
         widget._index++;
@@ -58,23 +57,23 @@ class _AdsWidgetState extends State<AdsWidget> {
       }
     });
   }
- 
+
   @override
   void dispose() {
     super.dispose();
-    //stopper le minuteur
-    // null coaslesing : utilisation ?
+    // stopper le minuteur
+    // null coaslescing : utilisation ?
     // ! : permet de définir que la valeur n'est pas nulle
     widget._timer!.cancel();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // le mot_clé widget permet d'accéder à la classe du wiget à partir de la classe de l'état du widget
+        // le mot-clé widget permet d'accéder à la classe du widget à partir de la classe de l'état du widget
         Image.asset('assets/img/${widget._items[widget._index]['img']}'),
-        Text(widget._items[widget._index]['text']),
+        Text(widget._items[widget._index]['text'])
       ],
     );
   }

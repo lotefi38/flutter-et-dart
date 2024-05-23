@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:provider/provider.dart';
 import 'package:store/models/product.dart';
 import 'package:store/providers/product_provider.dart';
@@ -8,15 +9,8 @@ class ProductDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Récupérer le produit depuis le ProductProvider
+    // watch (getter) : accéder au product stocké dans ProductProvider
     Product? product = context.watch<ProductProvider>().product;
-
-    // Vérifier que le produit n'est pas nul
-    if (product == null) {
-      return const Center(
-        child: Text('Aucun produit disponible'),
-      );
-    }
 
     return Column(
       children: [
@@ -24,44 +18,35 @@ class ProductDetailsWidget extends StatelessWidget {
           height: 300,
           decoration: BoxDecoration(
             image: DecorationImage(
+              fit: BoxFit.contain,
               image: NetworkImage(
-                product.image,
+                product!.image,
               ),
-              fit: BoxFit.cover,
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                product.title,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                '\$${product.price}',
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.green,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                product.description,
-                style: const TextStyle(
-                  fontSize: 10,
-                ),
-              ),
-            ],
+        const SizedBox(
+          height: 15,
+        ),
+        Text(
+          product.title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 25,
           ),
+        ),
+        Text(
+          '${product.price.toStringAsFixed(2)}€',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+        ),
+        RatingStars(
+          value: product.rating['rate'],
         ),
       ],
     );
   }
 }
+
